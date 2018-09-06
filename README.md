@@ -34,7 +34,7 @@ Formally, the problem is formulated as follows: solve the system:
 This problem also has a simple matrix representation:
 
 <p align="center">
-	<img alt="eqs" src="./imgs/02.png" width="50px">
+	<img alt="eqs" src="./imgs/02.png" width="100px">
 </p>
 
 Where A is a matrix of size n×m of coefficients and b is the column vector of size m.
