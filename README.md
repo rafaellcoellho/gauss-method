@@ -23,40 +23,15 @@ Run:
 $ ./gauss-method
 ```
 
-
 ### Input
 
-<<<<<<< HEAD
 One augmented matrix of a linear system
-=======
-<p align="center">
-	<img alt="eqs" src="./imgs/01.png" width="300px">
-</p>
-
-This problem also has a simple matrix representation:
-
-<p align="center">
-	<img alt="eqs" src="./imgs/02.png" width="100px">
-</p>
-
-Where A is a matrix of size n×m of coefficients and b is the column vector of size m.
-
-First we create augmented matrix:
->>>>>>> 36156a88f0341a05a6ee98af05931bd094e5000b
 
 <p align="center">
 	<img alt="eqs" src="./imgs/04.png" width="300px">
 </p>
 
-<<<<<<< HEAD
 #### Output
-=======
-Use the gaussian elimination to transform in a upper triangular matrix: 
-
-<p align="center">
-	<img alt="eqs" src="./imgs/03.jpg" width="250px">
-</p>
->>>>>>> 36156a88f0341a05a6ee98af05931bd094e5000b
 
 Print the original matrix, the upper triangular matrix equivalent of the original,the type of linear system and one solution for it, if exist. 
 
