@@ -28,7 +28,7 @@ $ ./gauss-method
 Formally, the problem is formulated as follows: solve the system:
 
 <p align="center">
-	<img alt="eqs" src="./imgs/01.png" width="200px">
+	<img alt="eqs" src="./imgs/01.png" width="300px">
 </p>
 
 This problem also has a simple matrix representation:
@@ -42,13 +42,13 @@ Where A is a matrix of size n×m of coefficients and b is the column vector of s
 First we create augmented matrix:
 
 <p align="center">
-	<img alt="eqs" src="./imgs/04.png" width="200px">
+	<img alt="eqs" src="./imgs/04.png" width="300px">
 </p>
 
 Use the gaussian elimination to transform in a upper triangular matrix: 
 
 <p align="center">
-	<img alt="eqs" src="./imgs/03.jpg" width="150px">
+	<img alt="eqs" src="./imgs/03.jpg" width="250px">
 </p>
 
 And find the solution with backward substitution.
