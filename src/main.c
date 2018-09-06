@@ -1,51 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include "helper.h"
 
 #define EPSILON 0.000001
 
-double **allocateMatrix(int lines, int coluns)
-{
-	double **matrix;
-	
-	matrix = malloc(sizeof(double *) * lines);
-	if(matrix == NULL)
-		return NULL;
-	
-	for(int i=0; i<lines; i++){
-		matrix[i] = malloc(sizeof(double) * coluns);
-		if(matrix[i] == NULL){
-			for(int j=0; j<i; j++)
-				free(matrix[j]);
-			free(matrix);
-			return NULL;
-		}
-	}
-
-	return matrix;
-}
-
-void readMatrix(double **matrix, int lines, int coluns)
-{
-	for(int i=0; i<lines; i++){
-		for(int j=0; j<coluns; j++){
-			printf("M[%d][%d]=",i+1,j+1);
-			scanf("%lf", &matrix[i][j]);
-		}
-	}
-}
-
-void printMatrix(double **matrix, int lines, int coluns)
-{
-	for(int i=0; i<lines; i++){
-		printf("\n");
-		for(int j=0; j<coluns; j++){
-			printf("%10.3lf", matrix[i][j]);
-		}
-	}
-}
-
-int sRetro(double **m, int n, double x[])
+int backwardSubstitution(double **m, int n, double x[])
 {
 	int i,j;
 	int type = 0;
@@ -55,7 +15,7 @@ int sRetro(double **m, int n, double x[])
 		for(j=i+1;j<n;j++){
 			sum += m[i][j]*x[j];
 		}
-		if(fabs(m[i][i]==0) < EPSILON){
+		if(fabs(m[i][i]) < EPSILON){
 			if(fabs(m[i][n]-sum) < EPSILON){
 				x[i] = 0;
 				type = 0;
@@ -116,7 +76,7 @@ int main(void)
 	printf("\nMatriz triangularizada\n");
 	printMatrix(m,n,n+1);
 
-	int type = sRetro(m,n,x);
+	int type = backwardSubstitution(m,n,x);
 	if(type==2){
 		printf("\nSL IMCOMPATIVEL\n");
 	}else{
@@ -125,5 +85,6 @@ int main(void)
 			printf("x[%d]=%10.3lf\n", i+1, x[i]);
 		}
 	}
+
 	return 0;
 }
