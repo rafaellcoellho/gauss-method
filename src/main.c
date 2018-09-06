@@ -45,7 +45,8 @@ void printMatrix(double **matrix, int lines, int coluns)
 	}
 }
 
-int sRetro(double **m, int n, double x[]){
+int sRetro(double **m, int n, double x[])
+{
 	int i,j;
 	int type = 0;
 	double sum;
@@ -54,7 +55,7 @@ int sRetro(double **m, int n, double x[]){
 		for(j=i+1;j<n;j++){
 			sum += m[i][j]*x[j];
 		}
-		if(m[i][i]==0){
+		if(fabs(m[i][i]==0) < EPSILON){
 			if(fabs(m[i][n]-sum) < EPSILON){
 				x[i] = 0;
 				type = 0;
@@ -68,15 +69,6 @@ int sRetro(double **m, int n, double x[]){
 	return type;
 }
 
-void swapLines(double **m, int n, int indexLine1, int indexLine2){
-	double aux;
-	for(int i=0; i<n;i++){
-		aux = m[indexLine1][i];
-		m[indexLine1][i] = m[indexLine2][i];
-		m[indexLine2][i] = aux;
-	}
-}
-
 void gaussianElimination(double **m, int n)
 {
 	int i,j,k;
@@ -86,13 +78,16 @@ void gaussianElimination(double **m, int n)
 			while(j<n && m[j][i]==0)
 				j++;
 			if(j<n){
-				swapLines(m, n, j, i);
+				double *aux = m[i];
+				m[i] = m[j];
+				m[j] = aux;
 			}
-		}else{
+		}
+		if(m[i][i] != 0){
 			for(j=i+1; j<n; j++){
 				double mult = -m[j][i]/m[i][i];
 				m[j][i]=0;
-				for(k=0;k<n+1;k++)
+				for(k=i+1;k<=n;k++)
 					m[j][k] = m[j][k] + mult*m[i][k];
 			}
 		}
@@ -118,15 +113,17 @@ int main(void)
 	printMatrix(m,n,n+1);
 
 	gaussianElimination(m,n);
+	printf("\nMatriz triangularizada\n");
 	printMatrix(m,n,n+1);
-	// int type = sRetro(m,n,x);
-	// if(type==2){
-	// 	printf("\nSL IMCOMPATIVEL\n");
-	// }else{
-	// 	printf("\nSL %sDETERMINADO\n", type==1 ? "IN":"");
-	// 	for(int i=0;i<n;i++){
-	// 		printf("x[%d]=%10.3lf\n", i+1, x[i]);
-	// 	}
-	// }
+
+	int type = sRetro(m,n,x);
+	if(type==2){
+		printf("\nSL IMCOMPATIVEL\n");
+	}else{
+		printf("\nSL %sDETERMINADO\n", type==1 ? "IN":"");
+		for(int i=0;i<n;i++){
+			printf("x[%d]=%10.3lf\n", i+1, x[i]);
+		}
+	}
 	return 0;
 }
